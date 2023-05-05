@@ -24,7 +24,6 @@ public class ProductionHouse {
         this.name = name;
         this.webSeriesList = new ArrayList<>();
     }
-
     public ProductionHouse() {
     }
 

@@ -29,5 +29,4 @@ public class UserControllers {
 
         return userService.getAvailableCountOfWebSeriesViewable(userId);
     }
-
 }
