@@ -39,10 +39,10 @@ public class UserService {
         for(WebSeries webSeries : webSeriesList){
             if(webSeries.getAgeLimit() <= user.getAge()){
                 if(user.getSubscription().equals(SubscriptionType.ELITE)) cnt++;
-                else if(user.getSubscription().equals(SubscriptionType.PRO) &&
+                 if(user.getSubscription().equals(SubscriptionType.PRO) &&
                         (webSeries.getSubscriptionType().equals(SubscriptionType.PRO)
                                 || webSeries.getSubscriptionType().equals(SubscriptionType.BASIC))) cnt++;
-                else if(user.getSubscription().equals(SubscriptionType.BASIC)
+                 if(user.getSubscription().equals(SubscriptionType.BASIC)
                         && webSeries.getSubscriptionType().equals(SubscriptionType.BASIC)) cnt++;
             }
         }
