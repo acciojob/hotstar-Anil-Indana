@@ -37,7 +37,7 @@ public class UserService {
         User user = userRepository.findById(userId).get();
         int cnt = 0;
         for(WebSeries webSeries : webSeriesList){
-            if(webSeries.getAgeLimit() <= user.getAge()){
+            if(webSeries.getAgeLimit() < user.getAge()){
                 if(user.getSubscription().equals(SubscriptionType.ELITE)) cnt++;
                  if(user.getSubscription().equals(SubscriptionType.PRO) &&
                         (webSeries.getSubscriptionType().equals(SubscriptionType.PRO)

@@ -28,21 +28,24 @@ public class WebSeriesService {
             throw new Exception("Series is already present");
         }
         ProductionHouse productionHouse = productionHouseRepository.findById(webSeriesEntryDto.getProductionHouseId()).get();
-        WebSeries webSeries = new WebSeries();
-        webSeries.setSeriesName(webSeriesEntryDto.getSeriesName());
-        webSeries.setAgeLimit(webSeriesEntryDto.getAgeLimit());
-        webSeries.setSubscriptionType(webSeriesEntryDto.getSubscriptionType());
-        webSeries.setRating(webSeriesEntryDto.getRating());
-        productionHouse.getWebSeriesList().add(webSeries);
+        if(productionHouse != null){
+            WebSeries webSeries = new WebSeries();
+            webSeries.setSeriesName(webSeriesEntryDto.getSeriesName());
+            webSeries.setAgeLimit(webSeriesEntryDto.getAgeLimit());
+            webSeries.setSubscriptionType(webSeriesEntryDto.getSubscriptionType());
+            webSeries.setRating(webSeriesEntryDto.getRating());
+            productionHouse.getWebSeriesList().add(webSeries);
 
-        double rating = 0;
-        for(WebSeries series1 : productionHouse.getWebSeriesList()){
-            rating += series1.getRating();
+            double rating = 0;
+            for(WebSeries series1 : productionHouse.getWebSeriesList()){
+                rating += series1.getRating();
+            }
+            productionHouse.setRatings(rating/productionHouse.getWebSeriesList().size());
+            webSeries.setProductionHouse(productionHouse);
+
+            ProductionHouse saved = productionHouseRepository.save(productionHouse);
+            return saved.getId();
         }
-        productionHouse.setRatings(rating/productionHouse.getWebSeriesList().size());
-        webSeries.setProductionHouse(productionHouse);
-
-        ProductionHouse saved = productionHouseRepository.save(productionHouse);
-        return saved.getId();
+        return -1;
     }
 }
